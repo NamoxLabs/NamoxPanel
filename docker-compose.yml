@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=namoxpanel
+      - POSTGRES_PASSWORD=
+    ports:
+      - '127.0.0.1:5432:5432'
+  redis:
+    image: redis
+    ports:
+      - '127.0.0.1:6379:6379'
+  search:
+    image: elasticsearch:2.4
+    ports:
+      - '127.0.0.1:9200:9200'
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app:Z
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+      - search
