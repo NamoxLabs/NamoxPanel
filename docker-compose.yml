@@ -4,7 +4,7 @@ services:
     image: postgres
     environment:
       - POSTGRES_USER=namoxpanel
-      - POSTGRES_PASSWORD=
+      - POSTGRES_PASSWORD=namoxpanel
     ports:
       - '127.0.0.1:5432:5432'
   redis:
@@ -18,6 +18,13 @@ services:
   web:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
+    environment:
+      - DATABASE_URL=postgres://namoxpanel:namoxpanel@db/namoxpanel
+      - DEFAULT_FROM_EMAIL=noreply@namoxpanel.com
+      - ELASTICSEARCH_URL=http://search:9200/
+      - OPENEXCHANGERATES_API_KEY
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=changeme
     volumes:
       - .:/app:Z
     ports:
