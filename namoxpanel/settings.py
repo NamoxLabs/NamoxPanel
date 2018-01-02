@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'namoxpanel.core',
+    #'namoxpanel.core',
     'namoxpanel.apps',
     'namoxpanel.dashboard',
     'namoxpanel.registration',
