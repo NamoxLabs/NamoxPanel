@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.views import serve
 
-from .core.sitemaps import sitemaps
+#from .core.sitemaps import sitemaps
 from .core.urls import urlpatterns as core_urls
 
 urlpatterns = [
