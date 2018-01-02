@@ -59,6 +59,50 @@ WEBPACK_LOADER = {
             r'.+\.hot-update\.js',
             r'.+\.map']}}
 
+LOGOUT_ON_PASSWORD_CHANGE = False
+
+
+ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+SEARCHBOX_URL = os.environ.get('SEARCHBOX_URL')
+BONSAI_URL = os.environ.get('BONSAI_URL')
+
+ES_URL = ELASTICSEARCH_URL or SEARCHBOX_URL or BONSAI_URL or ''
+if ES_URL:
+    SEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'saleor.search.backends.elasticsearch2',
+            'URLS': [ES_URL],
+            'INDEX': os.environ.get('ELASTICSEARCH_INDEX_NAME', 'storefront'),
+            'TIMEOUT': 5,
+            'AUTO_UPDATE': True},
+        'dashboard': {
+            'BACKEND': 'saleor.search.backends.dashboard',
+            'URLS': [ES_URL],
+            'INDEX': os.environ.get('ELASTICSEARCH_INDEX_NAME', 'storefront'),
+            'TIMEOUT': 5,
+            'AUTO_UPDATE': False}
+    }
+else:
+    SEARCH_BACKENDS = {}
+
+
+#GRAPHENE = {
+#    'MIDDLEWARE': [
+#        'graphene_django.debug.DjangoDebugMiddleware'
+#    ],
+#    'SCHEMA': 'namoxpanel.graphql.api.schema',
+#    'SCHEMA_OUTPUT': os.path.join(
+#        PROJECT_ROOT, 'namoxpanel', 'static', 'schema.json')
+#}
+
+SITE_SETTINGS_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'saleor.registration.backends.facebook.CustomFacebookOAuth2',
+    'saleor.registration.backends.google.CustomGoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -75,8 +119,83 @@ INSTALLED_APPS = [
     'namoxpanel.search',
     'namoxpanel.userprofile',
 
+    # External apps
+    'versatileimagefield',
+    'babeldjango',
+    'django_prices',
+    'django_prices_openexchangerates',
+    'emailit',
+    'graphene_django',
+    'mptt',
+    'materializecssform',
+    'rest_framework',
     'webpack_loader',
+    #'social_django',
+    'django_countries',
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'filters': ['require_debug_true'],
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True
+        },
+        'saleor': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True
+        }
+    }
+}
+
+AUTH_USER_MODEL = 'userprofile.User'
+
+LOGIN_URL = '/account/login/'
+
+DEFAULT_COUNTRY = 'MX'
+DEFAULT_CURRENCY = 'MXN'
+AVAILABLE_CURRENCIES = [DEFAULT_CURRENCY]
+
+OPENEXCHANGERATES_API_KEY = os.environ.get('OPENEXCHANGERATES_API_KEY')
+ACCOUNT_ACTIVATION_DAYS = 3
+
+#Original
+LOGIN_REDIRECT_URL = 'home'
+
+GOOGLE_ANALYTICS_TRACKING_ID = os.environ.get('GOOGLE_ANALYTICS_TRACKING_ID')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,21 +209,53 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'namoxpanel.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
+#TEMPLATES = [
+#    {
+#        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+#        'DIRS': [],
+#        'APP_DIRS': True,
+#        'OPTIONS': {
+#            'context_processors': [
+#                'django.template.context_processors.debug',
+#                'django.template.context_processors.request',
+#                'django.contrib.auth.context_processors.auth',
+#                'django.contrib.messages.context_processors.messages',
+#            ],
+#        },
+#    },
+#]
+
+context_processors = [
+    'django.contrib.auth.context_processors.auth',
+    'django.template.context_processors.debug',
+    'django.template.context_processors.i18n',
+    'django.template.context_processors.media',
+    'django.template.context_processors.static',
+    'django.template.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'django.template.context_processors.request',
+    'social_django.context_processors.backends',
+    'social_django.context_processors.login_redirect',
 ]
+
+loaders = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    # TODO: this one is slow, but for now need for mptt?
+    'django.template.loaders.eggs.Loader']
+
+if not DEBUG:
+    loaders = [('django.template.loaders.cached.Loader', loaders)]
+
+
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [os.path.join(PROJECT_ROOT, 'templates')],
+    'OPTIONS': {
+        'debug': DEBUG,
+        'context_processors': context_processors,
+        'loaders': loaders,
+        'string_if_invalid': '<< MISSING VARIABLE "%s" >>' if DEBUG else ''}}]
 
 WSGI_APPLICATION = 'namoxpanel.wsgi.application'
 INTERNAL_IPS = os.environ.get('INTERNAL_IPS', '127.0.0.1').split()
@@ -112,6 +263,11 @@ INTERNAL_IPS = os.environ.get('INTERNAL_IPS', '127.0.0.1').split()
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 CACHES = {'default': django_cache_url.config()}
+
+if os.environ.get('REDIS_URL'):
+    CACHES['default'] = {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.environ.get('REDIS_URL')}
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -128,6 +284,11 @@ STATICFILES_DIRS = [
     ('assets', os.path.join(PROJECT_ROOT, 'namoxpanel', 'static', 'assets')),
     ('images', os.path.join(PROJECT_ROOT, 'namoxpanel', 'static', 'images')),
     ('dashboard', os.path.join(PROJECT_ROOT, 'namoxpanel', 'static', 'dashboard'))
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 ]
 
 # Password validation

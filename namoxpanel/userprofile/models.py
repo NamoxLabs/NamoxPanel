@@ -4,15 +4,13 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, Permi
 from django import forms
 from django.db import models
 from django.conf import settings
-from django.froms.models import model_to_dict
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import pgettext_lazy
-from django_countries.flieds import Country, CountryField
+from django_countries.fields import Country, CountryField
 
 from versatileimagefield.fields import VersatileImageField, PPOIField
 
-from ..search import index
 
 class AdressManager(models.Manager):
     def as_data(self, address):
@@ -32,7 +30,7 @@ class AdressManager(models.Manager):
         return address
 
 
-class Address():
+class Address(models.Model):
     first_name = models.CharField(
         pgettext_lazy('Address field', 'given name'),
         max_length=256, blank=True)
@@ -65,7 +63,7 @@ class Address():
     phone = models.CharField(
         pgettext_lazy('Address field', 'phone number'),
         max_length=30, blank=True)
-    objects = AddressManager()
+    objects = AdressManager()
 
     @property
     def full_name(self):
@@ -73,7 +71,7 @@ class Address():
 
     class Meta:
         verbose_name = pgettext_lazy('Address model', 'address')
-        verbose_name_plural = pggettext_lazy('Address model', 'addresses')
+        verbose_name_plural = pgettext_lazy('Address model', 'addresses')
 
     def __str__(self):
         if self.company_name:
@@ -102,10 +100,11 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
-class User(PermissionsMixin, AbstractBaseUser, index.Indexed):
+#user model definition
+class User(PermissionsMixin, AbstractBaseUser):
     email = models.EmailField(
         pgettext_lazy('User field', 'email'), unique=True)
-    username = models.CharField(
+    user = models.CharField(
             pgettext_lazy('User field', 'username'),
             max_length=50,
             blank=True)
@@ -122,15 +121,13 @@ class User(PermissionsMixin, AbstractBaseUser, index.Indexed):
     default_billing_address = models.ForeignKey(
         Address, related_name='+', null=True, blank=True,
         on_delete=models.SET_NULL,
-        verbose_name=pgettext_lazy('User field', 'default billing address')
-    )
-
+        verbose_name=pgettext_lazy('User field', 'default billing address'))
     USERNAME_FIELD = 'email'
 
     objects = UserManager()
 
-    search_fields = [
-        index.SearchField('email')]
+    #search_fields = [
+    #    index.SearchField('email')]
 
     class Meta:
         verbose_name = pgettext_lazy('User model', 'user')

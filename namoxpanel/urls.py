@@ -27,5 +27,4 @@ from .core.urls import urlpatterns as core_urls
 
 urlpatterns = [
     url(r'^', include(core_urls)),
-    path('admin/', admin.site.urls),
 ]
