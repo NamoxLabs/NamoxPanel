@@ -13,12 +13,16 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 from __future__ import unicode_literals
 
 import ast
+import django
+import os
 import os.path
 
 import dj_database_url
 import dj_email_url
 from django.contrib.messages import constants as messages
 import django_cache_url
+
+name = "Namox Panel"
 
 DEBUG = ast.literal_eval(os.environ.get('DEBUG', 'True'))
 
@@ -69,13 +73,13 @@ ES_URL = ELASTICSEARCH_URL or SEARCHBOX_URL or BONSAI_URL or ''
 if ES_URL:
     SEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'saleor.search.backends.elasticsearch2',
+            'BACKEND': 'namoxpanel.search.backends.elasticsearch2',
             'URLS': [ES_URL],
             'INDEX': os.environ.get('ELASTICSEARCH_INDEX_NAME', 'storefront'),
             'TIMEOUT': 5,
             'AUTO_UPDATE': True},
         'dashboard': {
-            'BACKEND': 'saleor.search.backends.dashboard',
+            'BACKEND': 'namoxpanel.search.backends.dashboard',
             'URLS': [ES_URL],
             'INDEX': os.environ.get('ELASTICSEARCH_INDEX_NAME', 'storefront'),
             'TIMEOUT': 5,
@@ -97,8 +101,6 @@ else:
 SITE_SETTINGS_ID = 1
 
 AUTHENTICATION_BACKENDS = [
-    'saleor.registration.backends.facebook.CustomFacebookOAuth2',
-    'saleor.registration.backends.google.CustomGoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -127,9 +129,8 @@ INSTALLED_APPS = [
     'graphene_django',
     'mptt',
     'materializecssform',
-    'rest_framework',
+    #'rest_framework',
     'webpack_loader',
-    #'social_django',
     'django_countries',
 ]
 
@@ -172,7 +173,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True
         },
-        'saleor': {
+        'namoxpanel': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True
@@ -196,15 +197,27 @@ LOGIN_REDIRECT_URL = 'home'
 
 GOOGLE_ANALYTICS_TRACKING_ID = os.environ.get('GOOGLE_ANALYTICS_TRACKING_ID')
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    'django.middleware.locale.LocaleMiddleware'
+)
+
+if django.VERSION < (1, 11):
+    MIDDLEWARE_CLASSES = MIDDLEWARE
+
+if (2,) <= django.VERSION < (2, 1):
+    from django.utils import deprecation
+    # Anything to make mptt.templatetags.mptt_admin importable
+    deprecation.RemovedInDjango20Warning = deprecation.RemovedInDjango21Warning
+
+elif django.VERSION >= (2,):
+    from django.utils import deprecation
+    # Anything to make mptt.templatetags.mptt_admin importable
+deprecation.RemovedInDjango20Warning = deprecation.RemovedInDjango30Warning
 
 ROOT_URLCONF = 'namoxpanel.urls'
 
@@ -227,33 +240,33 @@ ROOT_URLCONF = 'namoxpanel.urls'
 context_processors = [
     'django.contrib.auth.context_processors.auth',
     'django.template.context_processors.debug',
+    'django.template.context_processors.request',
     'django.template.context_processors.i18n',
     'django.template.context_processors.media',
     'django.template.context_processors.static',
     'django.template.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
-    'django.template.context_processors.request',
     'social_django.context_processors.backends',
     'social_django.context_processors.login_redirect',
 ]
 
-loaders = [
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
+#loaders = [
+#    'django.template.loaders.filesystem.Loader',
+#    'django.template.loaders.app_directories.Loader',
     # TODO: this one is slow, but for now need for mptt?
-    'django.template.loaders.eggs.Loader']
+#    'django.template.loaders.eggs.Loader']
 
-if not DEBUG:
-    loaders = [('django.template.loaders.cached.Loader', loaders)]
+#if not DEBUG:
+#    loaders = [('django.template.loaders.cached.Loader', loaders)]
 
 
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
     'DIRS': [os.path.join(PROJECT_ROOT, 'templates')],
+    'APP_DIRS': True,
     'OPTIONS': {
         'debug': DEBUG,
         'context_processors': context_processors,
-        'loaders': loaders,
         'string_if_invalid': '<< MISSING VARIABLE "%s" >>' if DEBUG else ''}}]
 
 WSGI_APPLICATION = 'namoxpanel.wsgi.application'

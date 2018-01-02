@@ -87,7 +87,7 @@
   },
   "metadata": {
     "graphql": {
-      "schema": "./saleor/static/schema.json"
+      "schema": "./namoxpanel/static/schema.json"
     }
   },
   "scripts": {
