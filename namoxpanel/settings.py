@@ -10,8 +10,25 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
-import sys
-import os
+from __future__ import unicode_literals
+
+import ast
+import os.path
+
+import dj_database_url
+import dj_email_url
+from django.contrib.messages import constants as messages
+import django_cache_url
+
+DEBUG = ast.literal_eval(os.environ.get('DEBUG', 'True'))
+
+SITE_ID = 1
+
+PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
+
+ROOT_URLCONF = 'namoxpanel.urls'
+
+WSGI_APPLICATION = 'namoxpanel.wsgi.application'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,13 +51,15 @@ STATICFILES_DIRS = (
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
-    }
-}
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'assets/',
+        'STATS_FILE': os.path.join(PROJECT_ROOT, 'webpack-bundle.json'),
+        'POLL_INTERVAL': 0.1,
+        'IGNORE': [
+            r'.+\.hot-update\.js',
+            r'.+\.map']}}
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,6 +67,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'namoxpanel.apps',
+    'namoxpanel.dashboard',
+    'namoxpanel.registration',
+    'namoxpanel.search',
+    'namoxpanel.userprofile',
 
     'webpack_loader',
 ]
@@ -81,18 +106,24 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'namoxpanel.wsgi.application'
-
-
+INTERNAL_IPS = os.environ.get('INTERNAL_IPS', '127.0.0.1').split()
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+CACHES = {'default': django_cache_url.config()}
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default='postgres://:namoxpanel@localhost:5432/',
+        conn_max_age=600)
 }
 
+TIME_ZONE = 'America/Monterrey'
+LANGUAGE_CODE = 'es'
+LOCALE_PATHS = [os.path.join(PROJECT_ROOT, 'locale')]
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
