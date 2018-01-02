@@ -63,8 +63,8 @@ var providePlugin = new webpack.ProvidePlugin({
 var config = {
   entry: {
     //category: './namoxpanel/static/js/category.js',
-    //dashboard: './namoxpanel/static/dashboard/js/dashboard.js',
-    //storefront: './namoxpanel/static/js/storefront.js',
+    dashboard: './namoxpanel/static/dashboard/js/dashboard.js',
+    main: './namoxpanel/static/js/main.js',
     vendor: [
       'babel-es6-polyfill',
       'jquery',
