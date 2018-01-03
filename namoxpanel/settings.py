@@ -13,8 +13,11 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 from __future__ import unicode_literals
 
 import ast
+<<<<<<< HEAD
 import django
 import os
+=======
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 import os.path
 
 import dj_database_url
@@ -22,8 +25,11 @@ import dj_email_url
 from django.contrib.messages import constants as messages
 import django_cache_url
 
+<<<<<<< HEAD
 name = "Namox Panel"
 
+=======
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 DEBUG = ast.literal_eval(os.environ.get('DEBUG', 'True'))
 
 SITE_ID = 1
@@ -52,6 +58,7 @@ ALLOWED_HOSTS = []
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+<<<<<<< HEAD
 
 WEBPACK_LOADER = {
     'DEFAULT': {
@@ -104,6 +111,19 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+=======
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'assets/',
+        'STATS_FILE': os.path.join(PROJECT_ROOT, 'webpack-bundle.json'),
+        'POLL_INTERVAL': 0.1,
+        'IGNORE': [
+            r'.+\.hot-update\.js',
+            r'.+\.map']}}
+
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -113,13 +133,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+<<<<<<< HEAD
     'namoxpanel.core',
+=======
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
     'namoxpanel.apps',
     'namoxpanel.dashboard',
     'namoxpanel.registration',
     'namoxpanel.search',
     'namoxpanel.userprofile',
 
+<<<<<<< HEAD
     # External apps
     'versatileimagefield',
     'babeldjango',
@@ -132,6 +156,9 @@ INSTALLED_APPS = [
     #'rest_framework',
     'webpack_loader',
     'django_countries',
+=======
+    'webpack_loader',
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 ]
 
 LOGGING = {
@@ -250,6 +277,7 @@ context_processors = [
     'social_django.context_processors.login_redirect',
 ]
 
+<<<<<<< HEAD
 #loaders = [
 #    'django.template.loaders.filesystem.Loader',
 #    'django.template.loaders.app_directories.Loader',
@@ -269,6 +297,8 @@ TEMPLATES = [{
         'context_processors': context_processors,
         'string_if_invalid': '<< MISSING VARIABLE "%s" >>' if DEBUG else ''}}]
 
+=======
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 WSGI_APPLICATION = 'namoxpanel.wsgi.application'
 INTERNAL_IPS = os.environ.get('INTERNAL_IPS', '127.0.0.1').split()
 # Database
@@ -276,6 +306,7 @@ INTERNAL_IPS = os.environ.get('INTERNAL_IPS', '127.0.0.1').split()
 
 CACHES = {'default': django_cache_url.config()}
 
+<<<<<<< HEAD
 if os.environ.get('REDIS_URL'):
     CACHES['default'] = {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -302,6 +333,20 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 ]
+=======
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgres://:namoxpanel@localhost:5432/',
+        conn_max_age=600)
+}
+
+TIME_ZONE = 'America/Monterrey'
+LANGUAGE_CODE = 'es'
+LOCALE_PATHS = [os.path.join(PROJECT_ROOT, 'locale')]
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

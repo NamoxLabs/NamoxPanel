@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.conf import settings
 from django.contrib import messages, auth
 from django.contrib.auth import views as django_views
@@ -60,3 +61,8 @@ def password_reset_confirm(request, uidb64=None, token=None):
         request, uidb64=uidb64, token=token, template_name=template_name,
         post_reset_redirect=post_reset_redirect,
         set_password_form=set_password_form)
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228

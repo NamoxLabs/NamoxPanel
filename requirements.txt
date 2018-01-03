@@ -22,13 +22,21 @@ django-countries==4.1
 django-emailit==0.2.2
 django-materializecss-form==1.0.1
 django-mptt==0.8.7
+<<<<<<< HEAD
 django-payments==0.12.1
+=======
+django-payments==0.11.0.3
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 django-prices-openexchangerates==0.1.12
 django-prices==0.4.13
 django-redis==4.7.0
 django-storages==1.5.2
 django-versatileimagefield==1.6.2
+<<<<<<< HEAD
 django-webpack-loader==0.5.0
+=======
+django-webpack-loader==0.4.1
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 django==2.0
 djangorestframework==3.5.3
 docutils==0.13.1          # via botocore
@@ -73,8 +81,14 @@ requests==2.12.4
 s3transfer==0.1.10        # via boto3
 satchless==1.1.3
 singledispatch==3.4.0.3   # via graphene-django
+<<<<<<< HEAD
 six==1.10.0               # via cryptography, faker, graphene, graphene-django, graphql-core, graphql-relay, mock, packaging, purl, python-dateutil, setuptools, singledispatch==1.1.0
 social-auth-app-django==2.1.0
+=======
+six==1.10.0               # via cryptography, faker, graphene, graphene-django, graphql-core, graphql-relay, mock, packaging, purl, python-dateutil, setuptools, singledispatch, social-auth-app-django, social-auth-core
+social-auth-app-django==1.1.0
+social-auth-core==1.2.0   # via social-auth-app-django
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 stripe==1.46.0            # via django-payments
 suds-jurko==0.6           # via django-payments
 text-unidecode==1.0

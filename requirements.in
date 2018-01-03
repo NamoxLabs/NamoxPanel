@@ -9,14 +9,22 @@ django-countries>=4.1
 django-emailit>=0.2.2
 django-materializecss-form>=0.1
 django-mptt>=0.7.1
+<<<<<<< HEAD
 django-payments>=0.12.1
+=======
+django-payments>=0.11.0,<0.12a0
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 django-prices>=0.4.11,<0.5a0
 django-prices-openexchangerates>=0.1.12,<0.2a0
 django-redis>=4.0.0
 djangorestframework>=3.1
 django-storages>=1.4.1
 django-versatileimagefield>=1.0.1
+<<<<<<< HEAD
 django-webpack-loader>=0.5.0
+=======
+django-webpack-loader>=0.3.0
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 elasticsearch>=2.0.0,<3.0.0
 faker>=0.7.7
 google-measurement-protocol>=0.1.2,<0.2a0
@@ -33,7 +41,12 @@ purl>=0.4.1
 pytest>=2.8.0
 pytest-django
 requests>=1.2.0
+<<<<<<< HEAD
 social-auth-app-django>=2.1.0
 satchless>=1.1.2,<1.2a0
+=======
+satchless>=1.1.2,<1.2a0
+social-auth-app-django>=1.1.0
+>>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
 text-unidecode
 uwsgi>=2.0.0
