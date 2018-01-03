@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin)
@@ -135,8 +134,3 @@ class User(PermissionsMixin, AbstractBaseUser):
 
     def get_full_name(self):
         return self.email
-=======
-from django.db import models
-
-# Create your models here.
->>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228

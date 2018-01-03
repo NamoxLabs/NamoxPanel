@@ -87,11 +87,7 @@
   },
   "metadata": {
     "graphql": {
-<<<<<<< HEAD
       "schema": "./namoxpanel/static/schema.json"
-=======
-      "schema": "./saleor/static/schema.json"
->>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
     }
   },
   "scripts": {

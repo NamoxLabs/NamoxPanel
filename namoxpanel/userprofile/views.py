@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -56,8 +55,3 @@ def address_delete(request, pk):
         return HttpResponseRedirect(reverse('profile:details') + '#addresses')
     return TemplateResponse(
         request, 'userprofile/address-delete.html', {'address': address})
-=======
-from django.shortcuts import render
-
-# Create your views here.
->>>>>>> 4cc4f52aaab0ef9a9345286ec6e160ad42762228
