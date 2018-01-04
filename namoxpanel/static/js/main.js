@@ -87,35 +87,4 @@ $(function() {
 
 $(document).ready(function() {
   console.log('Hello World');
-
-  $('.delete-address').click(function(){
-    if ($('#delete-address-button').hasClass('none-delete')) {
-      $('#delete-address-button').removeClass('none-delete');
-    } else {
-      $('#delete-address-button').addClass('none-delete');
-    }
-
-    if ($('#address-delete').hasClass('none-delete')){
-      alert("Delete this address");
-      $('#address-delete').removeClass('none-delete');
-    } else {
-      alert("No delete this address");
-      $('#address-delete').addClass('none-delete');
-    }
-  });
-
-  $('#cancel-delete-address').click(function(){
-    if ($('#delete-address-button').hasClass('none-delete')) {
-      $('#delete-address-button').removeClass('none-delete');
-    } else {
-      $('#delete-address-button').addClass('none-delete');
-    }
-
-    if ($('#address-delete').hasClass('none-delete')) {
-      $('#address-delete').removeClass('none-delete');
-    } else {
-      $('#address-delete').addClass('none-delete');
-    }
-  });
-
 });

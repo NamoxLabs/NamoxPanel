@@ -27,4 +27,6 @@ dist/
 /namoxpanel/static/assets/
 .idea
 package-lock.json
-package-lock.json
+webpack-bundle.json
+yarn.lock
+requirements.in

@@ -49,9 +49,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets'),
-)
 WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,
@@ -272,19 +269,6 @@ DATABASES = {
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    ('assets', os.path.join(PROJECT_ROOT, 'namoxpanel', 'static', 'assets')),
-    ('images', os.path.join(PROJECT_ROOT, 'namoxpanel', 'static', 'images')),
-    ('dashboard', os.path.join(PROJECT_ROOT, 'namoxpanel', 'static', 'dashboard'))
-]
-
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
-]
-
 DATABASES = {
     'default': dj_database_url.config(
         default='postgres://:namoxpanel@localhost:5432/',
@@ -323,5 +307,16 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    ('assets', os.path.join(PROJECT_ROOT, 'namoxpanel', 'static', 'assets')),
+    ('images', os.path.join(PROJECT_ROOT, 'namoxpanel', 'static', 'images')),
+    ('dashboard', os.path.join(PROJECT_ROOT, 'namoxpanel', 'static', 'dashboard'))
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
+]
