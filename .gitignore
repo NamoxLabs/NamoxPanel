@@ -30,3 +30,4 @@ package-lock.json
 webpack-bundle.json
 yarn.lock
 requirements.in
+.DS_Store

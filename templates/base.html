@@ -35,11 +35,16 @@
                       &nbsp;
                     </li>
                     <li class="col s3 l3">
-                      <ul class="hide-on-med-and-down">
-                        <li>
-                          <a href="{% url "account_login" %}" class="btn waves-effect fat light-blue-text text-lighten-1 grey lighten-5 ">Login</a>
-                        </li>
-                      </ul>
+                      {% if user.is_authenticated %}
+                        <p>{{ user }}</p>
+                      {% else %}
+                        <ul class="hide-on-med-and-down">
+                          <li>
+                            <a href="{% url "account_login" %}" class="btn waves-effect fat light-blue-text text-lighten-1 grey lighten-5 ">Login</a>
+                          </li>
+                        </ul>
+                      {% endif %}
+
                     </li>
                     <ul class="side-nav" id="mobile-demo">
                       <li><a href="{% url "account_login" %}">Login</a></li>
@@ -63,7 +68,9 @@
       </footer>
     {% endblock %}
     {% block footer_scripts %}
-      <script type="text/javascript" ></script>
+      <script type="text/javascript"></script>
+      {% render_bundle 'vendor' 'js' %}
+      {% render_bundle 'main' 'js' %}
     {% endblock footer_scripts%}
     <script type="application/ld+json">{{ webpage_schema|safe }}</script>
   </body>
