@@ -4,5 +4,10 @@
 {% load staticfiles %}
 
 {% block content %}
-  <p>Hi!</p>
+  {% if user.is_authenticated %}
+    <p>Hi! Authenticated</p>
+    {{ user }}
+  {% else %}
+    <p>Hi! Not Authenticated</p>
+  {% endif %}
 {% endblock %}
