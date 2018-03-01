@@ -4,7 +4,7 @@
   "main": "Gruntfile.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/NamoxLabs/MatrixPanel"
+    "url": "git://github.com/NamoxLabs/NamoxPanel"
   },
   "author": "Namox Labs Software",
   "license": "BSD-3-Clause",

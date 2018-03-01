@@ -25,28 +25,21 @@ import django_cache_url
 name = "Namox Panel"
 
 DEBUG = ast.literal_eval(os.environ.get('DEBUG', 'True'))
-
 SITE_ID = 1
-
 PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
-
 ROOT_URLCONF = 'namoxpanel.urls'
-
 WSGI_APPLICATION = 'namoxpanel.wsgi.application'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ofl@ud7f@se#r8f*5a2*%zip(d@04za43as73g(yix8pv7=sw4'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 WEBPACK_LOADER = {
@@ -83,7 +76,6 @@ if ES_URL:
     }
 else:
     SEARCH_BACKENDS = {}
-
 
 #GRAPHENE = {
 #    'MIDDLEWARE': [
@@ -238,7 +230,6 @@ context_processors = [
 #if not DEBUG:
 #    loaders = [('django.template.loaders.cached.Loader', loaders)]
 
-
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
     'DIRS': [os.path.join(PROJECT_ROOT, 'templates')],
@@ -269,12 +260,6 @@ DATABASES = {
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://:namoxpanel@localhost:5432/',
-        conn_max_age=600)
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -292,7 +277,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
