@@ -1,3 +1,24 @@
+from django.template.response import TemplateResponse
 from django.shortcuts import render
 
-# Create your views here.
+from .forms import AppForm
+
+def apps_review(request):
+    print("apps_review")
+
+
+def app_review(request):
+    print("app_review")
+
+
+def create_app(request):
+    app_form = AppForm(data=request.POST or None)
+    if app_form.is_valid():
+        app_form.save()
+
+    ctx = {'app_form': app_form}
+    return TemplateResponse(request, 'app/create_app.html', ctx)
+
+
+def delete_app(request):
+    print("delete_app")

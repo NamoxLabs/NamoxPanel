@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load materializecss %}
+{% load staticfiles %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <div class="col l12 col s12">
+
+      <div class="row">
+        <div class="col s12 m1">&nbsp;</div>
+        <div class="col s12 m10">
+          <div class="card">
+            <div class="card-content black-text">
+              <form method="post" action="{% url 'create-app' %}">
+                <span class="card-title" style="color:black;">{% trans "Create an App" context "App Creation form title" %}</span>
+                <p style="color:black;">Add all the configuration data needed for your app.</p>
+                {% csrf_token %}
+                <div class="row">
+                  {{ app_form.app_name|materializecss:"input-field m4" }}
+                  {{ app_form.version|materializecss:"input-field m4" }}
+                  {{ app_form.technology|materializecss:"input-field m4" }}
+                </div>
+                <div class="row">
+                  {{ app_form.description|materializecss:"input-field m12" }}
+                </div>
+                <div class="row">
+                  {{ app_form.db_engine|materializecss:"input-field m4" }}
+                  {{ app_form.db_name|materializecss:"input-field m4" }}
+                  {{ app_form.db_dump|materializecss:"input-field m4" }}
+                </div>
+                <div class="row">
+                  {{ app_form.stack|materializecss:"input-field m4" }}
+                  {{ app_form.git_repo|materializecss:"input-field m4" }}
+                  {{ app_form.dockerized|materializecss:"input-field m4" }}
+                </div>
+                <div class="row">
+                  {{ app_form.admin_panel|materializecss:"input-field m3" }}
+                  {{ app_form.product|materializecss:"input-field m3" }}
+                  {{ app_form.output|materializecss:"input-field m3" }}
+                  {{ app_form.request_log|materializecss:"input-field m3" }}
+                </div>
+
+                <div class="row">
+                  <div class="col m4">
+                    &nbsp;
+                  </div>
+                  <div class="col m5">
+                    &nbsp;
+                  </div>
+                  <div class="col m3">
+                    <br/>
+                    <button type="submit" class="btn primary narrow">
+                      {% trans "Create" context "Create form primary action" %}
+                    </button>
+                  </div>
+                </div>
+
+                <div class="row">
+                  {{ app_form.errors }}
+                  {{ app_form.non_field_errors }}
+                </div>
+
+                {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}"
+                         value="{{ redirect_field_value }}"/>
+                {% endif %}
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m1">&nbsp;</div>
+      </div>
+
+    </div>
+  {% else %}
+    <p>Not Authenticated</p>
+  {% endif %}
+{% endblock %}

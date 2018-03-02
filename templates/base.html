@@ -19,41 +19,41 @@
     {% block header %}
       <header>
         <nav class="nav-extended">
-              <div class="nav-wrapper">
-                <div class="col s12">
-                  <ul class="row"> <!-- row -->
-                    <li class="left col s2 l2 hide-on-small-only">
-                      <a href="{% url "home" %}" class="brand-logo"><img src="{% static "images/.png" %}" height="70px" width="120px" alt="Your Logo" /></a>
-                    </li>
-                    <li class="col hide-on-med-and-up">
-                      <a href="{% url "home" %}" class="brand-logo nav-logo"><img src="{% static "images/.png" %}" height="100px" width="170px" /></a>
-                    </li>
-                    <li>
-                      <a href="#" data-activates="mobile-demo" class="button-collapse nav-img"><svg data-src="{% static "dashboard/images/.svg"%}" width="24" height="24" /></a>
-                    </li>
-                    <li class="col s7 l7">
-                      &nbsp;
-                    </li>
-                    <li class="col s3 l3">
-                      {% if user.is_authenticated %}
-                        <p>{{ user }}</p>
-                      {% else %}
-                        <ul class="hide-on-med-and-down">
-                          <li>
-                            <a href="{% url "account_login" %}" class="btn waves-effect fat light-blue-text text-lighten-1 grey lighten-5 ">Login</a>
-                          </li>
-                        </ul>
-                      {% endif %}
-
-                    </li>
-                    <ul class="side-nav" id="mobile-demo">
-                      <li><a href="{% url "account_login" %}">Login</a></li>
+          <div class="nav-wrapper">
+            <div class="col s12">
+              <ul class="row"> <!-- row -->
+                <li class="left col s2 l2 hide-on-small-only">
+                  <a href="{% url "home" %}" class="brand-logo"><img src="{% static "images/.png" %}" height="70px" width="120px" alt="Namox Panel" /></a>
+                </li>
+                <li class="col hide-on-med-and-up">
+                  <a href="{% url "home" %}" class="brand-logo nav-logo"><img src="{% static "images/.png" %}" height="100px" width="170px" /></a>
+                </li>
+                <li>
+                  <a href="#" data-activates="mobile-demo" class="button-collapse nav-img"><svg data-src="{% static "dashboard/images/.svg"%}" width="24" height="24" /></a>
+                </li>
+                <li class="col s7 l7">
+                  &nbsp;
+                </li>
+                <li class="col s3 l3">
+                  {% if user.is_authenticated %}
+                    <p><b>{{ user }}</b></p>
+                  {% else %}
+                    <ul class="hide-on-med-and-down">
+                      <li>
+                        <a href="{% url "account_login" %}" class="btn waves-effect fat light-blue-text text-lighten-1 grey lighten-5 ">Login</a>
+                      </li>
                     </ul>
-                    <br/>
-                  </ul>
-                </div>
-              </div>
-            </nav>
+                  {% endif %}
+
+                </li>
+                <ul class="side-nav" id="mobile-demo">
+                  <li><a href="{% url "account_login" %}">Login</a></li>
+                </ul>
+                <br/>
+              </ul>
+            </div>
+          </div>
+        </nav>
       </header>
     {% endblock %}
     <main>

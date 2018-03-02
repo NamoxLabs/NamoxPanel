@@ -28,4 +28,9 @@ Relay.injectNetworkLayer(
 // jQuery Document Ready
 $(document).ready(function() {
   console.log('Welcome');
+
+  $('#id_technology').material_select();
+  $('#id_db_engine').material_select();
+  $('#id_product').material_select();
+  $('#id_output').material_select();
 });

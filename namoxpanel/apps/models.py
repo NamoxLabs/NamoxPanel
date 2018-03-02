@@ -17,37 +17,37 @@ class App(models.Model):
         null=True,
         default='1.0')
     TECH_CHOICES = (
-        ('python', 'Python'),
-        ('-', '------'),
-        ('flask', 'Flask'),
-        ('django', 'Django'),
-        ('drf', 'Django Rest Framework'),
-        ('django_drf', 'Django With Django Rest Framework'),
-        ('apistar', 'Apistar'),
-        ('php', 'PHP'),
-        ('-', '------'),
-        ('plain_php', 'Plan PHP'),
-        ('plain_php_7', 'Plan PHP 7'),
-        ('slim_php', 'Slim PHP'),
-        ('ci_php', 'CodeIgniter'),
-        ('symfony', 'Symfony'),
-        ('yii', 'Yii'),
-        ('yii_2', 'Yii 2'),
-        ('wp', 'WordPress'),
-        ('go', 'Go'),
-        ('-', '------'),
-        ('js', 'JavaScript'),
-        ('-', '------')
+        ('-', 'Technology'),
+        ('flask', 'Flask - Python'),
+        ('django', 'Django - Python'),
+        ('drf', 'Django Rest Framework - Python'),
+        ('django_drf', 'Django With Django Rest Framework - Python'),
+        ('apistar', 'Apistar - Python'),
+        ('plain_php', 'Plan PHP - PHP'),
+        ('plain_php_7', 'Plan PHP 7 - PHP'),
+        ('mamp_php', 'MAMP - PHP'),
+        ('lamp_php', 'LAMP - PHP'),
+        ('slim_php', 'Slim PHP - PHP'),
+        ('ci_php', 'CodeIgniter - PHP'),
+        ('symfony', 'Symfony - PHP'),
+        ('yii', 'Yii - PHP'),
+        ('yii_2', 'Yii 2 - PHP'),
+        ('wp', 'WordPress - PHP'),
+        ('buffalo-go', 'Buffalo - Go'),
+        ('mean-js', 'MEAN - JavaScript'),
+        ('apollo-server-js', 'Apollo Server - JavaScript'),
+        ('parse-js', 'Parse - JavaScript')
     )
     technology = models.CharField(
         choices=TECH_CHOICES,
         max_length=200,
         blank=True,
         null=True,
-        default='flask')
+        default='-')
     stack = models.BooleanField(
         default=False)
     DATABASE_CHOICES = (
+        ('-', 'Database'),
         ('postgres', 'PostgreSQL'),
         ('mysql', 'MySql'),
         ('mariadb', 'MariaDB'),
@@ -58,7 +58,7 @@ class App(models.Model):
         max_length=200,
         blank=True,
         null=True,
-        default='postgres')
+        default='-')
     db_name = models.CharField(
         max_length=180,
         blank=True,
@@ -75,7 +75,8 @@ class App(models.Model):
     admin_panel = models.BooleanField(
         blank=True,
         default=False)
-    TECHNOLOGY_CHOICES = (
+    PRODUCT_CHOICES = (
+        ('-', 'Product'),
         ('rest', 'REST'),
         ('soap', 'SOAP'),
         ('websocket', 'WebSocket'),
@@ -85,15 +86,15 @@ class App(models.Model):
         ('blog-api', 'Blog API'),
         ('personal-page', 'Personal Page')
     )
-    technology = models.CharField(
-        choices=TECHNOLOGY_CHOICES,
+    product = models.CharField(
+        choices=PRODUCT_CHOICES,
         max_length=200,
         blank=True,
-        null=True,
-        default='rest'
-    )
+        default='-')
     OUTPUT_CHOICES = (
+        ('-', 'Output Data Format'),
         ('json', 'JSON'),
+        ('xml', 'XML'),
         ('yalm', 'YALM'),
     )
     output = models.CharField(
@@ -101,8 +102,7 @@ class App(models.Model):
         max_length=200,
         blank=True,
         null=True,
-        default='json'
-    )
+        default='-')
     request_log = models.BooleanField(
                 default=True)
     is_active = models.BooleanField(
