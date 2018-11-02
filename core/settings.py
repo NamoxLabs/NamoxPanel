@@ -20,7 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'rtt4leia4_rbe(t)h1k1o#8jgl-*nyc60fh3nto0zr**hmq=o@'
+#SECRET_KEY = 'rtt4leia4_rbe(t)h1k1o#8jgl-*nyc60fh3nto0zr**hmq=o@'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'rest_framework',
+    #'social_django',
+    #'rest_framework_social_oauth2',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -86,13 +91,18 @@ DATABASES = {
 }
 """
 
+if os.getenv('DOCKER_CONTAINER'):
+    POSTGRES_HOST = 'db'
+else:
+    POSTGRES_HOST = '127.0.0.1'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'namoxpanel',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': POSTGRES_HOST,
         'PORT': '5432',
     }
 }
@@ -116,6 +126,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# DJANGO REST FRAMEWORK SETTING
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.ext.rest_framework.OAuth2Authentication',
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
+    ),
+}
+
+# DJANGO SETTINS
+AUTHENTICATION_BACKEND = (
+    'rest_framework_social_oauth2.backends.DjangoOauth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
