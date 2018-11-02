@@ -3,6 +3,19 @@ version: '3'
 services:
   db:
     image: postgres
+    environment:
+      - POSTGRES_USER=saleor
+      - POSTGRES_PASSWORD=saleor
+    ports:
+      - '127.0.0.1:5432:5432'
+  redis:
+    image: redis
+    ports:
+      - '127.0.0.1:6379:6379'
+  search:
+    image: elasticsearch:6.3.1
+    ports:
+      - '127.0.0.1:9200:9200'
   web:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
