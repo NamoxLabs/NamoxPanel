@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/giovannidelgado/Documents/repos/namoxlabs/NamoxPanel/venv"
+VIRTUAL_ENV="/Users/giovannidelgado/Documents/repos/namoxlabs/django-rest-template/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

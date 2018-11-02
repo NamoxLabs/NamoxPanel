@@ -36,7 +36,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/giovannidelgado/Documents/repos/namoxlabs/NamoxPanel/venv"
+set -gx VIRTUAL_ENV "/Users/giovannidelgado/Documents/repos/namoxlabs/django-rest-template/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
