@@ -1,59 +1,45 @@
 # IMPORTS DJANGO
 from django import forms
+from django.utils.translation import pgettext_lazy
 
 # IMPORTS APP
-from graphicsdb.models import Proyect, Entity, Attribute, Relationship
+from . import models
 
-class ProyectoForm( forms.ModelForm ):
-
+class ProjectForm( forms.ModelForm ):
     class Meta:
-        model  = Proyect
+        model  = models.Project
         fields = [
-            'name',
-            'register',
-            'last_update'
+            'name'
         ]
 
         labels = {
-            'name'       : 'Name',
-            'register'   : 'Register',
-            'last_update': 'Last update'
+            'name'       : 'Name'
         }
 
         widgets = {
-            'name'       : forms.TextInput( attrs = { 'class': '' } ),
-            'register'   : forms.DateTimeField( disabled = True ),
-            'last_update': forms.DateTimeField( disabled = True )
+            'name'       : forms.TextInput( attrs = { 'class': '' } )
         }
+
 
 class EntityForm( forms.ModelForm ):
 
     class Meta:
 
-        model  = Entity
+        model  = models.Entity
         fields = [
-            'id_proyect',
-            'name',
-            'register',
-            'last_update'
+            'name'
         ]
 
         labels = {
-            'id_proyect' : 'Proyect',
-            'name'       : 'Name',
-            'register'   : 'Register',
-            'last_update': 'Last update'
+            'name'       : 'Name'
         }
 
         widgets = {
-            'id_proyect' : forms.Select( attrs = { 'class' : '' } ),
             'name'       : forms.TextInput( attrs = { 'class' : '' } ),
-            'register'   : forms.DateTimeField( disabled = True ),
-            'last_update': forms.DateTimeField( disabled = True )
         }
 
 
-
+"""
 class AttributeForm( forms.ModelForm ):
 
     class Meta:
@@ -97,6 +83,6 @@ class AttributeForm( forms.ModelForm ):
             'register'         : forms.DateTimeField( disabled = True ),
             'last_update'      : forms.DateTimeField( disabled = True )
         }
-
+"""
 # TODO ver que es mas conveniente para Relationship
 

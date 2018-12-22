@@ -1,19 +1,31 @@
 from django.shortcuts import render
 from django.http      import HttpResponse
+from django.template.response import TemplateResponse
+
+from . import forms
 
 # Create your views here.
 
 # PROYECTS VIEWS
-def listProyect( request ):
+def listProject( request ):
     pass
 
-def createProyect( request ):
+def createProject( request ):
+    user = request.user
+    create_project = forms.ProjectForm(data=request.POST or None)
+    if create_project.is_valid():
+        project = create_project.save(commit=False)
+        project.created_by = request.user
+        project.save()
+
+        #return TemplateResponse("projects/overview.html")
+    ctx = {'create_project': create_project}
+    return TemplateResponse(request, 'projects/create_project.html', ctx)
+
+def editProject( request ):
     pass
 
-def editProyect( request ):
-    pass
-
-def deleteProyect( request ):
+def deleteProject( request ):
     pass
 
 # ENTITYS VIEWS
