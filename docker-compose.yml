@@ -8,16 +8,16 @@ services:
     ports:
       - '127.0.0.1:5432:5432'
   #redis:
-  #  image: redis
-  #  ports:
-  #    - '127.0.0.1:6379:6379'
-  #search:
-  #  image: elasticsearch:2.4
-  #  ports:
-  #    - '127.0.0.1:9200:9200'
+    #image: redis
+    #ports:
+     # - '127.0.0.1:6379:6379'
+  # search:
+    # image: elasticsearch:2.4
+    # ports:
+    #   - '127.0.0.1:9200:9200'
   web:
     build: .
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
     environment:
       - DATABASE_URL=postgres://namoxpanel:namoxpanel@db/namoxpanel
       - DEFAULT_FROM_EMAIL=noreply@namoxpanel.com

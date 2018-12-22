@@ -25,6 +25,7 @@ from graphene_django.views import GraphQLView
 from .core.urls import urlpatterns as core_urls
 from .registration.urls import urlpatterns as registration_urls
 from .userprofile.urls import urlpatterns as userprofile_urls
+from graphicsdb.urls import urlpatterns as proyects_urls
 from .apps.urls import urlpatterns as apps_urls
 
 urlpatterns = [
@@ -34,4 +35,5 @@ urlpatterns = [
     #url(r'^jsi18n/', javascript_catalog, name='javascript-catalog'),
     url(r'^profile/', include(userprofile_urls)),
     url(r'^apps/', include(apps_urls)),
+    url( r'^proyects/', include( proyects_urls ) ),
 ]

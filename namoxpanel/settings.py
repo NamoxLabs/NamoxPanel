@@ -107,6 +107,7 @@ INSTALLED_APPS = [
     'namoxpanel.registration',
     'namoxpanel.search',
     'namoxpanel.userprofile',
+    'namoxpanel.graphicsdb',
 
     # External apps
     'versatileimagefield',
