@@ -100,7 +100,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-#user model definition
+# User model definition
 class User(PermissionsMixin, AbstractBaseUser):
     email = models.EmailField(
         pgettext_lazy('User field', 'email'), unique=True)
