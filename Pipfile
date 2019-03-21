@@ -81,7 +81,6 @@ Babel = "==2.3.4"
 BabelDjango = "==0.2.2"
 Faker = "==1.0.4"
 Markdown = "==2.6.7"
-Pillow = "==3.4.2"
 uWSGI = "==2.0.18"
 
 [requires]
