@@ -5,38 +5,20 @@ from django.utils.translation import pgettext_lazy
 # IMPORTS APP
 from . import models
 
-class ProjectForm( forms.ModelForm ):
+class ProjectForm(forms.ModelForm):
     class Meta:
-        model  = models.Project
-        fields = [
-            'name'
-        ]
-
-        labels = {
-            'name'       : 'Name'
-        }
-
-        widgets = {
-            'name'       : forms.TextInput( attrs = { 'class': '' } )
-        }
+        model  = models.Database
+        fields = ['name']
+        labels = {'name': 'Name'}
+        # widgets = {'name': forms.TextInput(attrs = {'class': ''})}
 
 
-class EntityForm( forms.ModelForm ):
-
+class EntityForm(forms.ModelForm):
     class Meta:
-
-        model  = models.Entity
-        fields = [
-            'name'
-        ]
-
-        labels = {
-            'name'       : 'Name'
-        }
-
-        widgets = {
-            'name'       : forms.TextInput( attrs = { 'class' : '' } ),
-        }
+        model = models.Entity
+        fields = ['name']
+        labels = {'name': 'Name'}
+        # widgets = {'name': forms.TextInput(attr={'class': ''})}
 
 
 """
@@ -84,5 +66,4 @@ class AttributeForm( forms.ModelForm ):
             'last_update'      : forms.DateTimeField( disabled = True )
         }
 """
-# TODO ver que es mas conveniente para Relationship
 

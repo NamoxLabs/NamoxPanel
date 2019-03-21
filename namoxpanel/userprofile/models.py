@@ -99,6 +99,7 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
+
 #user model definition
 class User(PermissionsMixin, AbstractBaseUser):
     email = models.EmailField(

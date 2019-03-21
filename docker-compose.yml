@@ -17,7 +17,7 @@ services:
     #   - '127.0.0.1:9200:9200'
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:9098
     environment:
       - DATABASE_URL=postgres://namoxpanel:namoxpanel@db/namoxpanel
       - DEFAULT_FROM_EMAIL=noreply@namoxpanel.com
@@ -28,7 +28,7 @@ services:
     volumes:
       - .:/app:Z
     ports:
-      - "8000:8000"
+      - "9098:9098"
     depends_on:
       - db
       #- redis

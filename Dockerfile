@@ -12,7 +12,7 @@ RUN pip install -r /app/requirements.txt
 ADD . /app
 WORKDIR /app
 
-EXPOSE 8000
-ENV PORT 8000
+EXPOSE 9098
+ENV PORT 9098
 
 CMD ["uwsgi", "/app/namoxpanel/wsgi/uwsgi.ini"]
