@@ -1,10 +1,8 @@
 version: '3'
+
 services:
   db:
-    image: postgres
-    environment:
-      - POSTGRES_USER=namoxpanel
-      - POSTGRES_PASSWORD=namoxpanel
+    image: postgres:9.5
     ports:
       - '127.0.0.1:5432:5432'
   #redis:
@@ -17,7 +15,7 @@ services:
     #   - '127.0.0.1:9200:9200'
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:9099
     environment:
       - DATABASE_URL=postgres://namoxpanel:namoxpanel@db/namoxpanel
       - DEFAULT_FROM_EMAIL=noreply@namoxpanel.com
@@ -26,9 +24,12 @@ services:
     #  - REDIS_URL=redis://redis:6379/0
       - SECRET_KEY=changeme
     volumes:
-      - .:/app:Z
+      - .:/code
     ports:
       - "8000:8000"
+    environment:
+      - SECRET_KEY=rtt4leia4_rbe(t)h1k1o#8jgl-*nyc60fh3nto0zr**hmq=o@
+      - DOCKER_CONTAINER=True
     depends_on:
       - db
       #- redis

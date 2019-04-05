@@ -31,6 +31,8 @@ webpack-bundle.json
 yarn.lock
 requirements.in
 .DS_Store
-
-
 /documents
+venv
+venv/
+/venv
+/venv/
