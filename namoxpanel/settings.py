@@ -107,6 +107,7 @@ INSTALLED_APPS = [
     'namoxpanel.registration',
     'namoxpanel.search',
     'namoxpanel.userprofile',
+    'namoxpanel.graphicsdb',
 
     # External apps
     'versatileimagefield',
@@ -115,7 +116,7 @@ INSTALLED_APPS = [
     'django_prices_openexchangerates',
     'emailit',
     'graphene_django',
-    'mptt',
+    # 'mptt',
     'materializecssform',
     'webpack_loader',
     'django_countries',

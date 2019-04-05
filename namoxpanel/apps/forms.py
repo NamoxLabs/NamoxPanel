@@ -5,8 +5,8 @@ from django.conf import settings
 
 from .models import App
 
-class AppForm(forms.ModelForm):
 
+class AppForm(forms.ModelForm):
     class Meta:
         model = App
         fields = '__all__'

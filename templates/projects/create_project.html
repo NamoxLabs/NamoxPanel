@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load materializecss %}
+{% load staticfiles %}
+
+{% block content %}
+
+<form method="post" action="{% url 'create_proyect' %}">
+    <span class="card-title" style="color:black;">{% trans "Create an App" context "App Creation form title" %}</span>
+    <p style="color:black;">Add all the configuration data needed for your app.</p>
+    {% csrf_token %}
+    <div class="row">
+
+    <input id="name" type="text" name="name">
+
+    <div class="row">
+        <div class="col m4">
+          &nbsp;
+        </div>
+        <div class="col m5">
+          &nbsp;
+        </div>
+        <div class="col m3">
+          <br/>
+          <button type="submit" class="btn primary narrow">
+            {% trans "Create" context "Create form primary action" %}
+          </button>
+        </div>
+      </div>
+
+    <div class="row">
+        {{ create_project.errors }}
+        {{ create_project.non_field_errors }}
+    </div>
+
+  {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}"
+           value="{{ redirect_field_value }}"/>
+  {% endif %}
+</form>
+
+{% endblock %}
