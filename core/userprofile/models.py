@@ -1,14 +1,10 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin)
-from django import forms
 from django.db import models
-from django.conf import settings
 from django.utils import timezone
 from django.utils.translation import pgettext_lazy
 from django_countries.fields import Country, CountryField
-
-from versatileimagefield.fields import VersatileImageField, PPOIField
 
 
 class AdressManager(models.Manager):
