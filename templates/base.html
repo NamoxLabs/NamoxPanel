@@ -23,10 +23,10 @@
             <div class="col s12">
               <ul class="row"> <!-- row -->
                 <li class="left col s2 l2 hide-on-small-only">
-                  <a href="{% url "home" %}" class="brand-logo"><img src="{% static "images/.png" %}" height="70px" width="120px" alt="Namox Panel" /></a>
+                  <a href="{% url 'home' %}" class="brand-logo"><img src="{% static "images/.png" %}" height="70px" width="120px" alt="Namox Panel" /></a>
                 </li>
                 <li class="col hide-on-med-and-up">
-                  <a href="{% url "home" %}" class="brand-logo nav-logo"><img src="{% static "images/.png" %}" height="100px" width="170px" /></a>
+                  <a href="{% url 'home' %}" class="brand-logo nav-logo"><img src="{% static "images/.png" %}" height="100px" width="170px" /></a>
                 </li>
                 <li>
                   <a href="#" data-activates="mobile-demo" class="button-collapse nav-img"><svg data-src="{% static "dashboard/images/.svg"%}" width="24" height="24" /></a>
@@ -40,14 +40,13 @@
                   {% else %}
                     <ul class="hide-on-med-and-down">
                       <li>
-                        <a href="{% url "account_login" %}" class="btn waves-effect fat light-blue-text text-lighten-1 grey lighten-5 ">Login</a>
+                        <a href="{% url 'account:login' %}" class="btn waves-effect fat light-blue-text text-lighten-1 grey lighten-5 ">Login</a>
                       </li>
                     </ul>
                   {% endif %}
-
                 </li>
                 <ul class="side-nav" id="mobile-demo">
-                  <li><a href="{% url "account_login" %}">Login</a></li>
+                  <li><a href="{% url 'account:login' %}">Login</a></li>
                 </ul>
                 <br/>
               </ul>

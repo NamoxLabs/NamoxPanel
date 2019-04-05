@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-{% load prices_i18n %}
 {% load i18n %}
 
 {% load materializecss %}
@@ -26,7 +25,7 @@
         &nbsp;
       </div>
       <div class="col m8 login__form">
-        <form method="post" action="{% url 'account_signup' %}">
+        <form method="post" action="{% url 'account:signup' %}">
           <fieldset>
             {% csrf_token %}
 

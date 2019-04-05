@@ -12,14 +12,10 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 from __future__ import unicode_literals
 
-import django
 import ast
-import os
 import os.path
 
 import dj_database_url
-import dj_email_url
-from django.contrib.messages import constants as messages
 import django_cache_url
 
 name = "Namox Panel"
@@ -112,8 +108,6 @@ INSTALLED_APPS = [
     # External apps
     'versatileimagefield',
     'babeldjango',
-    'django_prices',
-    'django_prices_openexchangerates',
     'emailit',
     'graphene_django',
     # 'mptt',

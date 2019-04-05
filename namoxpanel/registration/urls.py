@@ -1,17 +1,16 @@
-from django.urls import path
+# from django.urls import path
 from django.contrib.auth import views as auth_views
 
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib.auth import views as django_views
 
 from . import views
 
+# app_name = "accounts"
 urlpatterns = [
-    # url(r'^login/$', views.login, name='account_login'),
-    path('login/', auth_views.LoginView.as_view()),
-    url(r'^logout/$', views.logout, name='account_logout'),
-    url(r'^signup/$', views.signup, name='account_signup'),
-
+    url(r'^login/$', views.login, name='login'),
+    url(r'^logout/$', views.logout, name='logout'),
+    url(r'^signup/$', views.signup, name='signup'),
     url(r'^password/reset/$', views.password_reset,
         name='account_reset_password'),
     # url(r'^password/reset/done/$', django_views.password_reset_done,

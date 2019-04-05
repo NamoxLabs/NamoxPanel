@@ -10,5 +10,5 @@
   {% else %}
     <p>Hi! Not Authenticated</p>
   {% endif %}
-  <a href="{% url "create-app" %}" class="btn waves-effect fat light-blue-text text-lighten-1 grey lighten-5">Create an App</a>
+  <a href="{% url 'apps:create-app' %}" class="btn waves-effect fat light-blue-text text-lighten-1 grey lighten-5">Create an App</a>
 {% endblock %}

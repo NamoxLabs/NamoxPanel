@@ -1,4 +1,3 @@
-from django.template.response import TemplateResponse
 from django.shortcuts import render
 
 from .forms import AppForm
@@ -23,8 +22,8 @@ def create_app(request):
         app_form = AppForm()
 
     ctx = {'app_form': app_form}
-    # return TemplateResponse(request, 'app/create_app.html', ctx)
-    return render(request, 'app/create_app.html', context=ctx)
+    return TemplateResponse(request, 'app/create_app.html', ctx)
+    # return render(request, 'app/create_app.html', context=ctx)
 
 
 def delete_app(request):

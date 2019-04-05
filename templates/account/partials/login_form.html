@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load staticfiles %}
 
-<form method="post" action="{% url 'account_login' %}" novalidate>
+<form method="post" action="{% url 'account:login' %}" novalidate>
   {% csrf_token %}
   <fieldset>
     {{ form }}
@@ -14,7 +14,7 @@
       <div class="col m12">
         <div class="col m12">
           <div class="col m6">
-            <a href="{% url 'account_signup' %}" class="col m10 btn secondary narrow">
+            <a href="{% url 'account:signup' %}" class="col m10 btn secondary narrow">
               {% trans "Register for Free!" context "Login form register action" %}
             </a>
           </div>
