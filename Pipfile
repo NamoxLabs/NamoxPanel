@@ -82,6 +82,3 @@ BabelDjango = "==0.2.2"
 Faker = "==1.0.4"
 Markdown = "==2.6.7"
 uWSGI = "==2.0.18"
-
-[requires]
-python_version = "3.6.7"
