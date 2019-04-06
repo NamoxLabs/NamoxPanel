@@ -1,6 +1,6 @@
 from django.db import models
 
-from namoxpanel.userprofile.models import User
+from namoxpanel.account.models import User
 
 class Database(models.Model):
     name = models.CharField(

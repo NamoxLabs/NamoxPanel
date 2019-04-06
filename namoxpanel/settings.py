@@ -122,11 +122,12 @@ INSTALLED_APPS = [
 
     # Platform modules
     'namoxpanel.core',
+    'namoxpanel.account',
     'namoxpanel.apps',
     'namoxpanel.dashboard',
     'namoxpanel.registration',
     'namoxpanel.search',
-    'namoxpanel.userprofile',
+    # 'namoxpanel.userprofile',
     'namoxpanel.graphicsdb',
 ]
 
@@ -225,9 +226,9 @@ LOGGING = {
     }
 }
 
-AUTH_USER_MODEL = 'userprofile.User'
-
 LOGIN_URL = '/account/login/'
+
+AUTH_USER_MODEL = "account.User"
 
 DEFAULT_COUNTRY = 'MX'
 DEFAULT_CURRENCY = 'MXN'
