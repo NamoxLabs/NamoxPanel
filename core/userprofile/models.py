@@ -6,6 +6,11 @@ from django.utils import timezone
 from django.utils.translation import pgettext_lazy
 from django_countries.fields import Country, CountryField
 
+<<<<<<< HEAD:core/userprofile/models.py
+=======
+# from versatileimagefield.fields import VersatileImageField, PPOIField
+
+>>>>>>> drf_implementation:namoxpanel/userprofile/models.py
 
 class AdressManager(models.Manager):
     def as_data(self, address):
@@ -95,7 +100,8 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
-#user model definition
+
+# User model definition
 class User(PermissionsMixin, AbstractBaseUser):
     email = models.EmailField(
         pgettext_lazy('User field', 'email'), unique=True)
