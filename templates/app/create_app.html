@@ -12,7 +12,7 @@
         <div class="col s12 m10">
           <div class="card">
             <div class="card-content black-text">
-              <form method="post" action="{% url 'create-app' %}">
+              <form method="post" action="{% url 'apps:create-app' %}">
                 <span class="card-title" style="color:black;">{% trans "Create an App" context "App Creation form title" %}</span>
                 <p style="color:black;">Add all the configuration data needed for your app.</p>
                 {% csrf_token %}

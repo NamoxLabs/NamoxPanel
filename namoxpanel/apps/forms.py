@@ -1,12 +1,19 @@
 from __future__ import unicode_literals
 
 from django import forms
-from django.conf import settings
+from django.utils.translation import pgettext
 
 from .models import App
 
 
 class AppForm(forms.ModelForm):
+    app_name = forms.CharField(max_length=240,
+        label=pgettext('App form field', 'App Name'))
+    description = forms.CharField(
+        label=pgettext('App form field', 'Description'))
+    version = forms.CharField(max_length=15,
+        label=pgettext('App form field', 'Version'))
+
     class Meta:
         model = App
         fields = '__all__'

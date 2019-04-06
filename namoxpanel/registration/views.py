@@ -9,7 +9,6 @@ from django.contrib import messages
 
 from .forms import LoginForm, SignupForm, SetPasswordForm
 
-from namoxpanel.userprofile.models import User, Address
 
 def login(request):
     kwargs = {

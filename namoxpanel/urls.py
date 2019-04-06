@@ -14,26 +14,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.views import serve
-#from django.views.i18n import javascript_catalog
 from graphene_django.views import GraphQLView
 
-#from .core.sitemaps import sitemaps
 from .core.urls import urlpatterns as core_urls
-from .registration.urls import urlpatterns as registration_urls
+from .registration.urls import urlpatterns as user_account_urls
 from .userprofile.urls import urlpatterns as userprofile_urls
 from .graphicsdb.urls import urlpatterns as projects_urls
 from .apps.urls import urlpatterns as apps_urls
 
 urlpatterns = [
+    url(r'^apps/',  
+        include((apps_urls, 'apps'), namespace='apps')),
+    #url(r'^account/', include('.userprofile.urls')),
+    url(r'^account/',  
+        include((user_account_urls, 'account'), namespace='account')),
+    # url(r'^profile/', include(userprofile_urls)),
+    # url( r'^projects/', include(projects_urls)),
     url(r'^', include(core_urls)),
-    url(r'^account/', include(registration_urls)),
-    url(r'^graphql/', GraphQLView.as_view(graphiql=settings.DEBUG)),
-    #url(r'^jsi18n/', javascript_catalog, name='javascript-catalog'),
-    url(r'^profile/', include(userprofile_urls)),
-    url(r'^apps/', include(apps_urls)),
-    url( r'^projects/', include( projects_urls ) ),
+    #url(r'^graphql/', GraphQLView.as_view(graphiql=settings.DEBUG)),
 ]

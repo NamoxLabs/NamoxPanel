@@ -17,7 +17,7 @@ services:
     #   - '127.0.0.1:9200:9200'
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:9098
+    command: python manage.py runserver 0.0.0.0:9098 --reload
     environment:
       - DATABASE_URL=postgres://namoxpanel:namoxpanel@db/namoxpanel
       - DEFAULT_FROM_EMAIL=noreply@namoxpanel.com

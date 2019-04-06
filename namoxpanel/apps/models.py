@@ -1,5 +1,4 @@
 from django.utils.translation import pgettext_lazy
-from django.utils import timezone
 from django.db import models
 
 from namoxpanel.userprofile.models import User
@@ -50,6 +49,7 @@ PRODUCT_CHOICES = (
     ('blog-api', 'Blog API'),
     ('personal-page', 'Personal Page')
 )
+
 
 # Main object creation
 class App(models.Model):
@@ -112,14 +112,15 @@ class App(models.Model):
         blank=False,
         null=False,
         default=True)
-    created_by = models.ForeignKey(User, 
+    created_by = models.ForeignKey(
+        User,
         related_name='app_creator', 
         null=True, blank=True,
-        on_delete = models.CASCADE)
+        on_delete=models.CASCADE)
     created_at = models.DateTimeField(
-        auto_now = True)
+        auto_now=True)
     last_update = models.DateTimeField(
-        auto_now = True)
+        auto_now=True)
 
     class Meta:
         verbose_name = pgettext_lazy('App model', 'app')
