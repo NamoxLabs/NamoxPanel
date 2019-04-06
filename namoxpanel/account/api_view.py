@@ -1,10 +1,9 @@
-from django.contrib.auth import authenticate, login
-
+from django.contrib.auth import login
 """
 Django REST Framework libs
 """
 from rest_framework import generics, permissions, status
-from rest_framework.decorators import api_view, action
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
