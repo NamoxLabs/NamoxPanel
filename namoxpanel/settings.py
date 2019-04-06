@@ -233,10 +233,21 @@ if os.environ.get('REDIS_URL'):
         'LOCATION': os.environ.get('REDIS_URL')}
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://namoxpanel:namoxpanel@localhost:5432/namoxpanel',
-        conn_max_age=600)
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'namoxpanel',
+        'USER': 'giovannidelgado',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
+
+# DATABASES = {
+#    'default': dj_database_url.config(
+#        default='postgres://namoxpanel:namoxpanel@localhost:5432/namoxpanel',
+#        conn_max_age=600)
+# }
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
