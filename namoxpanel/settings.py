@@ -121,7 +121,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Platform modules
-    # 'namoxpanel.core',
+    'namoxpanel.core',
     'namoxpanel.account',
     'namoxpanel.apps',
     'namoxpanel.dashboard',
