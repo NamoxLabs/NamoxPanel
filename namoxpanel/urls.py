@@ -21,7 +21,7 @@ from django.contrib import admin
 
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.views import serve
-from graphene_django.views import GraphQLView
+# from graphene_django.views import GraphQLView
 
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
@@ -44,7 +44,7 @@ urlpatterns = [
     url(r'^api-token-auth', obtain_jwt_token, name='create-token'),
     url(r'^api-token-refresh', refresh_jwt_token, name='refresh-token'),
     url(r'^api-token-verify', verify_jwt_token, name='verify-token'),
-    #path('api/v1', include(router.urls)),
+    path('api/v1', include(router.urls)),
 
     #url(r'^apps/',
     #    include((apps_urls, 'apps'), namespace='apps')),
