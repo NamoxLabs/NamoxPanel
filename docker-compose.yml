@@ -1,10 +1,8 @@
 version: '3'
+
 services:
   db:
-    image: postgres
-    environment:
-      - POSTGRES_USER=namoxpanel
-      - POSTGRES_PASSWORD=namoxpanel
+    image: postgres:9.5
     ports:
       - '127.0.0.1:5432:5432'
   #redis:
@@ -26,7 +24,7 @@ services:
     #  - REDIS_URL=redis://redis:6379/0
       - SECRET_KEY=changeme
     volumes:
-      - .:/app:Z
+      - .:/code
     ports:
       - "9098:9098"
     depends_on:
