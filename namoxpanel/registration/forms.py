@@ -1,9 +1,9 @@
 from django import forms
-from django.utils.safestring import mark_safe
 from django.utils.translation import pgettext
 from django.contrib.auth import forms as django_forms
 
 from namoxpanel.userprofile.models import User, Address
+
 
 class LoginForm(django_forms.AuthenticationForm):
     username = forms.EmailField(
@@ -15,6 +15,7 @@ class LoginForm(django_forms.AuthenticationForm):
             email = request.GET.get('email')
             if email:
                 self.fields['username'].initial = email
+
 
 class DirectionForm(forms.ModelForm):
     first_name = forms.CharField(
@@ -55,10 +56,12 @@ class DirectionForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = ('first_name', 'last_name', 'company_name',
-            'street_address_1', 'street_address_2', 'city', 'city_area', 'postal_code', 'country', 'country_area', 'phone')
+                'street_address_1', 'street_address_2', 'city',
+                'city_area', 'postal_code', 'country', 'country_area', 'phone')
 
     def __init__(self, *args, **kwargs):
         super(DirectionForm, self).__init__(*args, **kwargs)
+
 
 class SignupForm(forms.ModelForm):
     password = forms.CharField(
@@ -87,6 +90,7 @@ class SignupForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
 
 class SetPasswordForm(django_forms.SetPasswordForm):
     def __init__(self, *args, **kwargs):

@@ -116,11 +116,11 @@ class App(models.Model):
         User,
         related_name='app_creator', 
         null=True, blank=True,
-        on_delete = models.CASCADE)
+        on_delete=models.CASCADE)
     created_at = models.DateTimeField(
-        auto_now = True)
+        auto_now=True)
     last_update = models.DateTimeField(
-        auto_now = True)
+        auto_now=True)
 
     class Meta:
         verbose_name = pgettext_lazy('App model', 'app')
