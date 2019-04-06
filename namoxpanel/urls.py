@@ -27,7 +27,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 from namoxpanel.account import api_view as users_api
-# from namoxpanel.apps import api_view as apps_api
+from namoxpanel.apps import api_view as apps_api
 
 #from .core.urls import urlpatterns as core_urls
 #from .registration.urls import urlpatterns as user_account_urls
@@ -35,8 +35,8 @@ from namoxpanel.account import api_view as users_api
 #from .graphicsdb.urls import urlpatterns as projects_urls
 #from .apps.urls import urlpatterns as apps_urls
 
-# router = DefaultRouter()
-# router.register(r'', )
+router = DefaultRouter()
+router.register(r'/apps', apps_api.Apps)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
