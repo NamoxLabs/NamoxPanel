@@ -14,6 +14,7 @@ from __future__ import unicode_literals
 
 import ast
 import os.path
+from datetime import timedelta
 
 import dj_database_url
 import django_cache_url
@@ -36,7 +37,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ofl@ud7f@se#r8f*5a2*%zip(d@04za43as73g(yix8pv7=sw4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1', '*']
 
 WEBPACK_LOADER = {
     'DEFAULT': {
@@ -88,24 +89,20 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+APPEND_SLASH = False
+ENABLE_SSL = ast.literal_eval(os.environ.get('ENABLE_SSL', 'False'))
+
+def get_host():
+    from django.contrib.sites.models import Site
+    return Site.objects.get_current().domain
+
+
 # Application definition
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-    'namoxpanel.core',
-    'namoxpanel.apps',
-    'namoxpanel.dashboard',
-    'namoxpanel.registration',
-    'namoxpanel.search',
-    'namoxpanel.userprofile',
-    'namoxpanel.graphicsdb',
-
     # External apps
+    'rest_framework',
+    'rest_framework.authtoken',
+    'social_django',
     'versatileimagefield',
     'babeldjango',
     'emailit',
@@ -114,7 +111,72 @@ INSTALLED_APPS = [
     'materializecssform',
     'webpack_loader',
     'django_countries',
+
+    # Django modules
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    # Platform modules
+    'namoxpanel.core',
+    'namoxpanel.apps',
+    'namoxpanel.dashboard',
+    'namoxpanel.registration',
+    'namoxpanel.search',
+    'namoxpanel.userprofile',
+    'namoxpanel.graphicsdb',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+# JWT settings
+JWT_AUTH = {
+    'JWT_ENCODE_HANDLER':
+    'rest_framework_jwt.utils.jwt_encode_handler',
+
+    'JWT_DECODE_HANDLER':
+    'rest_framework_jwt.utils.jwt_decode_handler',
+
+    'JWT_PAYLOAD_HANDLER':
+    'rest_framework_jwt.utils.jwt_payload_handler',
+
+    'JWT_PAYLOAD_GET_USER_ID_HANDLER':
+    'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
+
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'rest_framework_jwt.utils.jwt_response_payload_handler',
+
+    'JWT_SECRET_KEY': 'yBn3AVKkwOQNi8J8whnzjeUN90ViyiBJgP5g35f10P8PyNGeoeqeM4zeqjV1ZZV',
+    'JWT_GET_USER_SECRET_KEY': None,
+    'JWT_PUBLIC_KEY': None,
+    'JWT_PRIVATE_KEY': None,
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_VERIFY': True,
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_LEEWAY': 0,
+    'JWT_EXPIRATION_DELTA': timedelta(seconds=30000),
+    'JWT_AUDIENCE': None,
+    'JWT_ISSUER': None,
+
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+    'JWT_AUTH_COOKIE': None,
+}
 
 LOGGING = {
     'version': 1,
@@ -296,3 +358,42 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 ]
+
+ACCESS_CONTROL_ALLOW_HEADERS = '*'
+
+#CORS configuration
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
+CORS_ORIGIN_WHITELIST = (
+    'localhost',
+    'http://localhost',
+    'http://localhost:3000',
+    '127.0.0.1:3000',
+    '0.0.0.0:3000',
+)
+CORS_ORIGIN_REGEX_WHITELIST = (
+    'localhost',
+    'http://localhost',
+    'http://localhost:3000',
+    '127.0.0.1:3000',
+    '0.0.0.0:3000',
+)
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'POST',
+    'PUT'
+)
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+)
