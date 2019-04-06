@@ -39,6 +39,8 @@ SECRET_KEY = 'ofl@ud7f@se#r8f*5a2*%zip(d@04za43as73g(yix8pv7=sw4'
 DEBUG = True
 ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1', '*']
 
+AUTH_USER_MODEL = "account.User"
+
 WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,
