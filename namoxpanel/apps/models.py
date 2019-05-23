@@ -1,7 +1,7 @@
 from django.utils.translation import pgettext_lazy
 from django.db import models
 
-from namoxpanel.userprofile.models import User
+from namoxpanel.account.models import User
 
 TECH_CHOICES = (
     ('-', 'Technology'),
@@ -10,8 +10,8 @@ TECH_CHOICES = (
     ('drf', 'Django Rest Framework - Python'),
     ('django_drf', 'Django With Django Rest Framework - Python'),
     ('apistar', 'Apistar - Python'),
-    ('plain_php', 'Plain PHP - PHP'),
-    ('plain_php_7', 'Plain PHP 7 - PHP'),
+    ('plain_php', 'Plan PHP - PHP'),
+    ('plain_php_7', 'Plan PHP 7 - PHP'),
     ('mamp_php', 'MAMP - PHP'),
     ('lamp_php', 'LAMP - PHP'),
     ('slim_php', 'Slim PHP - PHP'),
@@ -61,36 +61,9 @@ class App(models.Model):
         null=True)
     version = models.CharField(
         max_length=15,
-        unique=True,
         blank=True,
         null=True,
         default='1.0')
-<<<<<<< HEAD:core/apps/apps.py
-    TECH_CHOICES = (
-        ('-', 'Technology'),
-        ('flask', 'Flask - Python'),
-        ('django', 'Django - Python'),
-        ('drf', 'Django Rest Framework - Python'),
-        ('django_drf', 'Django With Django Rest Framework - Python'),
-        ('apistar', 'Apistar - Python'),
-        ('plain_php', 'Plan PHP - PHP'),
-        ('plain_php_7', 'Plan PHP 7 - PHP'),
-        ('mamp_php', 'MAMP - PHP'),
-        ('lamp_php', 'LAMP - PHP'),
-        ('slim_php', 'Slim PHP - PHP'),
-        ('ci_php', 'CodeIgniter - PHP'),
-        ('symfony', 'Symfony - PHP'),
-        ('yii', 'Yii - PHP'),
-        ('yii_2', 'Yii 2 - PHP'),
-        ('wp', 'WordPress - PHP'),
-        ('plain-go', 'Golang'),
-        ('buffalo-go', 'Buffalo - Go'),
-        ('mean-js', 'MEAN - JavaScript'),
-        ('apollo-server-js', 'Apollo Server - JavaScript'),
-        ('parse-js', 'Parse - JavaScript')
-    )
-=======
->>>>>>> drf_implementation:namoxpanel/apps/models.py
     technology = models.CharField(
         choices=TECH_CHOICES,
         max_length=200,
@@ -109,10 +82,14 @@ class App(models.Model):
         max_length=180,
         blank=True,
         null=True)
-    db_dump = models.FileField(
-        upload_to='uploads/',
-        null=True,
-        blank=True)
+    db_dump = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True)
+    # db_dump = models.FileField(
+    #    upload_to='uploads/',
+    #    null=True,
+    #    blank=True)
     git_repo = models.TextField(
         blank=True,
         null=True)
@@ -140,7 +117,7 @@ class App(models.Model):
         default=True)
     created_by = models.ForeignKey(
         User,
-        related_name='app_creator', 
+        related_name='app_creator',
         null=True, blank=True,
         on_delete=models.CASCADE)
     created_at = models.DateTimeField(
