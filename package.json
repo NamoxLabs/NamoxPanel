@@ -20,7 +20,7 @@
     "classnames": "^2.2.5",
     "dropzone": "^4.3.0",
     "favicons-webpack-plugin": "0.0.9",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "jquery-match-height": "^0.7.2",
     "jquery-ui": "^1.12.1",
     "jquery.cookie": "^1.4.1",
